@@ -23,6 +23,10 @@ jobs:
         npm run build
     - name: Debug EC2_HOST
       run: echo "Connecting to ${{ secrets.EC2_HOST }}"
+    
+    - name: Test SSH connection
+      run: |
+        ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.EC2_HOST }} "echo ✅ Connected successfully"
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
